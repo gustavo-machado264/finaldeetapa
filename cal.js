@@ -16,11 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const objetivo = document.getElementById('objetivo').value;
     const preferencias = document.getElementById('preferencias').value || '';
 
-    // colete atividades selecionadas
-    const atividades = Array.from(document.querySelectorAll('input[name="atividades"]:checked')).map(i => i.value);
+    const atividades = Array.from(
+      document.querySelectorAll('input[name="atividades"]:checked')
+    ).map(i => i.value);
+
+    // 🔥 Verificação básica
+    if (!sexo || !idade || !peso || !altura || !atividade) {
+      resultadoDiv.innerHTML =
+        `<p style="color:red">Preencha todos os campos obrigatórios!</p>`;
+      return;
+    }
 
     try {
-      const res = await fetch('/api/calculate', {
+      const res = await fetch('http://localhost:3000/api/calculate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -35,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = await res.json();
 
-      // mostramos cálculo + recomendação
       resultadoDiv.innerHTML = `
         <h2>Resultado</h2>
         <p><strong>BMR:</strong> ${data.bmr.toFixed(0)} kcal/dia</p>

@@ -1,8 +1,6 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch'); // npm i node-fetch@2
 const path = require('path');
 
 const app = express();
@@ -10,13 +8,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* variáveis de ambiente obrigatórias
-const GROQ_API_URL = process.env.GROQ_API_URL; // ex: https://api.groq.ai/v1/models/...
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
-if (!GROQ_API_URL || !GROQ_API_KEY) {
-  console.warn('Aviso: GROQ_API_URL ou GROQ_API_KEY não definidos no .env');
-}
-*/
+
 // util: calcula BMR usando Mifflin-St Jeor
 function calcBMR({ sexo, peso, altura, idade }) {
   if (sexo === 'masculino') {
@@ -28,13 +21,9 @@ function calcBMR({ sexo, peso, altura, idade }) {
 
 function determineTargetCalories(tdee, objetivo) {
   switch (objetivo) {
-    case 'emagrecer':
-      return Math.max(1200, tdee - 500); // limite mínimo
-    case 'ganhar':
-      return tdee + 300; // leve excedente
-    case 'manter':
-    default:
-      return tdee;
+    case 'emagrecer': return Math.max(1200, tdee - 500);
+    case 'ganhar': return tdee + 300;
+    case 'manter': default: return tdee;
   }
 }
 
@@ -42,88 +31,62 @@ app.post('/api/calculate', async (req, res) => {
   try {
     const { sexo, idade, peso, altura, atividade, frequencia, objetivo, preferencias, atividades } = req.body;
 
-    // validação mínima
     if (!sexo || !idade || !peso || !altura || !atividade) {
       return res.status(400).send('Parâmetros insuficientes');
     }
 
-    const bmr = calcBMR({ sexo, peso: Number(peso), altura: Number(altura), idade: Number(idade) });
-    const tdee = bmr * Number(atividade);
+    const bmr = calcBMR({ sexo, peso, altura, idade });
+    const tdee = bmr * atividade;
     const targetCalories = determineTargetCalories(tdee, objetivo);
 
-    // construir prompt para Groq
     const prompt = `
 Você é uma nutricionista experiente. Com base nos dados abaixo, gere uma recomendação prática e objetiva:
 - Sexo: ${sexo}
 - Idade: ${idade}
-- Peso (kg): ${peso}
-- Altura (cm): ${altura}
-- Nível de atividade (fator): ${atividade}
-- Frequência de treinos por semana: ${frequencia || 'não informado'}
-- Atividades: ${Array.isArray(atividades) ? atividades.join(', ') : (atividades || 'não informado')}
+- Peso: ${peso}
+- Altura: ${altura}
+- Nível de atividade: ${atividade}
+- Frequência: ${frequencia}
+- Atividades: ${atividades?.join(', ')}
 - Objetivo: ${objetivo}
-- Preferências / restrições informadas pelo usuário: ${preferencias || 'nenhuma especificada'}
-- BMR estimado: ${Math.round(bmr)} kcal/dia
-- TDEE estimado: ${Math.round(tdee)} kcal/dia
-- Meta calórica sugerida: ${Math.round(targetCalories)} kcal/dia
-
-A saída deve conter:
-1) Um parágrafo curto explicando por que essa meta calórica.
-2) Um plano alimentar resumido para 1 dia (café, almoço, jantar e 2 lanches) com porções e calorias aproximadas que cheguem perto da meta calórica.
-3) Dicas práticas (compra/receitas rápidas) de acordo com os gostos do usuário.
-4) Se houver restrições mencionadas (ex: lactose, glúten, vegetarianismo), adapte as sugestões.
-
-Seja conciso, direto e entregue em português.
+- Preferências: ${preferencias}
+- BMR: ${Math.round(bmr)}
+- TDEE: ${Math.round(tdee)}
+- Meta: ${Math.round(targetCalories)}
     `;
 
-    // fallback: se NÃO tiver chave do Groq, retornamos apenas cálculo e instrução
-    if (!GROQ_API_KEY || !GROQ_API_URL) {
+    if (!GROQ_API_KEY) {
       return res.json({
-        bmr,
-        tdee,
-        targetCalories,
-        recommendation:
-          'API do Groq não configurada no servidor (.env). Configure GROQ_API_URL e GROQ_API_KEY para obter a recomendação da nutricionista via IA.'
+        bmr, tdee, targetCalories,
+        recommendation: 'API do Groq não configurada.'
       });
     }
 
-    // Chamada à API do Groq
-    // Observação: a forma concreta do body depende da API Groq específica (modelo / campos).
-    // Aqui usamos um formato genérico: { prompt: "...", max_tokens: 800 }
-    const groqResponse = await fetch(GROQ_API_URL, {
-      method: 'POST',
+    const groqResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${GROQ_API_KEY}`
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        prompt,
-        max_tokens: 800
+        model: "llama3-8b-8192",
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 800,
+        temperature: 0.7
       })
     });
 
     if (!groqResponse.ok) {
       const txt = await groqResponse.text();
-      console.error('Erro Groq:', txt);
-      return res.status(502).send('Erro na chamada da API do Groq: ' + txt);
+      console.error("=== ERRO GROQ RAW ===");
+      console.error(txt);
+      return res.status(502).send(txt);
     }
 
-    // interpretação da resposta (ajuste conforme formato real do Groq)
     const groqJson = await groqResponse.json();
 
-    // a resposta real pode vir em groqJson.output, groqJson.choices[0].text, etc.
-    // Aqui tentamos capturar texto em campos comuns; adapte se necessário.
-    let recommendationText = '';
-    if (groqJson.choices && groqJson.choices[0] && groqJson.choices[0].text) {
-      recommendationText = groqJson.choices[0].text;
-    } else if (groqJson.output && typeof groqJson.output === 'string') {
-      recommendationText = groqJson.output;
-    } else if (groqJson.result) {
-      recommendationText = JSON.stringify(groqJson.result, null, 2);
-    } else {
-      // fallback: stringify
-      recommendationText = JSON.stringify(groqJson, null, 2);
-    }
+    const recommendationText =
+      groqJson.choices?.[0]?.message?.content || "Sem resposta da IA.";
 
     return res.json({
       bmr,
@@ -131,12 +94,15 @@ Seja conciso, direto e entregue em português.
       targetCalories,
       recommendation: recommendationText
     });
+
   } catch (err) {
     console.error(err);
-    res.status(500).send('Erro interno: ' + err.message);
+    res.status(500).send(err.message);
   }
 });
 
-// start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server rodando na porta ${PORT}`));
+app.get('/', (req, res) => {
+  res.send('API funcionando! Use o frontend pelo Live Server 🙂');
+});
