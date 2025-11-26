@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ).map(i => i.value);
 
     try {
-      const res = await fetch("https://SEUAPP.up.railway.app/api/calculate", {
+      const res = await fetch("https://finaldeetapa-production.up.railway.app/api/calculate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
