@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const data = await res.json();
+
       resultadoDiv.innerHTML = `
         <h2>Resultado</h2>
         <p><strong>BMR:</strong> ${data.bmr.toFixed(0)} kcal/dia</p>
@@ -36,4 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>Recomendação da Nutricionista</h3>
         <div>${data.recommendation}</div>
       `;
-    } catch
+
+    } catch (err) {
+      resultadoDiv.innerHTML = `<p style="color:red;">Erro ao conectar à API.</p>`;
+      console.error(err);
+    }
+  });
+});
