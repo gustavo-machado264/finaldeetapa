@@ -17,14 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const res = await fetch("https://finaldeetapa-production.up.railway.app/api/calculate", {
+
+      const res = await fetch("https://finaldeetapa-production.up.railway.app/api/calculate/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify(payload)
       });
 
       if (!res.ok) {
-        throw new Error("Erro na API: " + res.status);
+        const errorText = await res.text();
+        throw new Error(`Erro na API (${res.status}): ${errorText}`);
       }
 
       const data = await res.json();
@@ -40,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (err) {
       resultadoDiv.innerHTML = `<p style="color:red;">Erro ao conectar à API.</p>`;
-      console.error(err);
+      console.error("Erro detalhado:", err);
     }
   });
 });
