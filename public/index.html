@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Nutricional</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Calculadora Nutricional com IA</h1>
+
+    <form id="formCalorias">
+      <label>Sexo:</label>
+      <select id="sexo" required>
+        <option value="">Selecione</option>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+      </select>
+
+      <label>Idade:</label>
+      <input type="number" id="idade" required>
+
+      <label>Peso (kg):</label>
+      <input type="number" id="peso" required>
+
+      <label>Altura (cm):</label>
+      <input type="number" id="altura" required>
+
+      <label>Nível de Atividade:</label>
+      <select id="atividade" required>
+        <option value="">Selecione</option>
+        <option value="1.2">Sedentário</option>
+        <option value="1.375">Leve</option>
+        <option value="1.55">Moderado</option>
+        <option value="1.725">Intenso</option>
+        <option value="1.9">Muito Intenso</option>
+      </select>
+
+      <label>Objetivo:</label>
+      <select id="objetivo">
+        <option value="manter">Manter</option>
+        <option value="emagrecer">Emagrecer</option>
+        <option value="ganhar">Ganhar massa</option>
+      </select>
+
+      <label>Preferências alimentares:</label>
+      <input type="text" id="preferencias" placeholder="Ex: sem lactose, vegetariano...">
+
+      <label>Frequência de treino semanal:</label>
+      <select id="frequencia">
+        <option value="1-2x">1-2x</option>
+        <option value="3-4x">3-4x</option>
+        <option value="5-6x">5-6x</option>
+      </select>
+
+      <label>Atividades praticadas:</label>
+      <div class="checkboxes">
+        <label><input type="checkbox" name="atividades" value="Musculação"> Musculação</label>
+        <label><input type="checkbox" name="atividades" value="Corrida"> Corrida</label>
+        <label><input type="checkbox" name="atividades" value="Ciclismo"> Ciclismo</label>
+        <label><input type="checkbox" name="atividades" value="Crossfit"> Crossfit</label>
+      </div>
+
+      <button type="submit">Calcular</button>
+    </form>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script src="cal.js"></script>
+</body>
+</html>
