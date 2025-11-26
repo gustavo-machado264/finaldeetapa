@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Treinos</title>
+    <link rel="stylesheet" href="listaDeTreino.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-container">
+        <h1 class="site-logo">Lista de Treinos</h1>
+        <!-- Navegação -->
+        <nav class="site-nav">
+            <a href="index.html">Início</a>
+            <a href="quem-somos.html" target="_blank">Quem Somos</a>
+            <a href="Academia.html">Academias</a>
+            <a href="calorias.html">Medir Kal</a>
+            <a href="listaDeTreino.html">Montar Treino</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- CAMPO DE BUSCA (COM OS IDs QUE O JS USA) -->
+    <div class="search-container">
+        <input type="text" id="treino" placeholder="Digite o exercício...">
+        <button id="procurarTreino">Procurar</button>
+    </div>
+
+    <!-- RESULTADOS DA BUSCA -->
+    <h2 class="gradient-text">Resultados da busca</h2>
+    <div id="procurados" class="lista"></div>
+
+    <!-- TREINOS ADICIONADOS -->
+    <h2 class="gradient-text">Seu treino</h2>
+    <div id="treino2" class="lista"></div>
+
+</div>
+
+<script src="listaDeTreino.js"></script>
+</body>
+</html>

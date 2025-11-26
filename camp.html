@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontre Campeonatos Próximos</title>
+    <link rel="stylesheet" href="camp.css">
+</head>
+
+<body>
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="header">
+        <div class="container header-flex">
+            <div class="logo">SportLife Hub</div>
+
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="quem-somos.html">Quem Somos</a>
+                <a href="Academia.html">Academias</a>
+                <a href="calorias.html">Medir Kal</a>
+                <a href="listaDeTreino.html">Montar Treino</a>
+                <a class="active" href="camp.html">Campeonatos</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- TÍTULO DA PÁGINA -->
+    <section class="page-header container">
+        <div class="logo-mini">Campeonatos</div>
+        <h1>Encontre campeonatos próximos a você</h1>
+        <p class="lead">Busque eventos esportivos perto da sua localização</p>
+    </section>
+
+    <!-- CARD DE FILTRO -->
+    <section class="container">
+        <div class="card">
+            <div class="grid">
+
+                <div class="col-4">
+                    <label>Cidade ou bairro</label>
+                    <input id="cidadeInput" type="text" placeholder="Ex: São Paulo ou Mooca">
+                </div>
+
+                <div class="col-3">
+                    <label>Modalidade</label>
+                    <select id="modalidadeSelect">
+                        <option value="">Todas</option>
+                        <option>Academia</option>
+                        <option>Atletismo</option>
+                        <option>Boxe</option>
+                        <option>Caminhada</option>
+                        <option>Capoeira</option>
+                        <option>Ciclismo</option>
+                        <option>Corrida</option>
+                        <option>Crossfit</option>
+                        <option>Jiu Jitsu</option>
+                        <option>Judo</option>
+                        <option>Karate</option>
+                        <option>Kickboxing</option>
+                        <option>Krav Maga</option>
+                        <option>Muay Thai</option>
+                        <option>Natação</option>
+                        <option>Taekwondo</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <label>Data</label>
+                    <select id="filtroData">
+                        <option value="">Todas</option>
+                        <option value="7">Próximos 7 dias</option>
+                        <option value="30">Próximos 30 dias</option>
+                        <option value="mes">Este mês</option>
+                        <option value="ano">Este ano</option>
+                        <option value="próximo">Ano que vem</option>
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <button class="btn" id="buscarGPS">Buscar</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTADOS -->
+    <section class="container">
+        <div id="lista-campeonatos" class="resultados">
+            <!-- Os resultados serão inseridos aqui pelo JS -->
+        </div>
+    </section>
+
+    <script src="camp.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procura de Academias</title>
+
+    <!-- Fonte Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Seu CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header class="header">
+    <div class="container header-flex">
+        <!-- Logo -->
+        <div class="logo">
+            SportLife Hub
+        </div>
+
+        <!-- Navegação -->
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="quem-somos.html">Quem Somos</a>
+            <a href="Academia.html">Academias</a>
+            <a href="calorias.html">Medir Kal</a>
+            <a href="listaDeTreino.html">Montar Treino</a>
+            <a href="camp.html">Campeonatos</a>
+        </nav>
+    </div>
+</header>
+
+        <div class="card">
+            <div class="grid">
+
+                <div class="col-4">
+                    <label for="cidadeInput">Cidade</label>
+                    <input type="text" id="cidadeInput" placeholder="Digite a cidade">
+                </div>
+
+                <div class="col-4">
+                    <label for="modalidadeSelect">Modalidade</label>
+                    <select id="modalidadeSelect">
+                        <option value="">Todas</option>
+                        <option value="academia">Academia</option>
+                        <option value="atletismo">Atletismo</option>
+                        <option value="boxe">Boxe</option>
+                        <option value="caminhada">Caminhada</option>
+                        <option value="capoeira">Capoeira</option>
+                        <option value="ciclismo">Ciclismo</option>
+                        <option value="corrida">Corrida</option>
+                        <option value="crossfit">Crossfit</option>
+                        <option value="jiu jitsu">Jiu Jitsu</option>
+                        <option value="judo">Judô</option>
+                        <option value="karate">Karatê</option>
+                        <option value="kickboxing">Kickboxing</option>
+                        <option value="krav maga">Krav Maga</option>
+                        <option value="muay thai">Muay Thai</option>
+                        <option value="natacao">Natação</option>
+                        <option value="taekwondo">Taekwondo</option>
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <button id="buscarGPS" class="btn">Buscar</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Resultados -->
+        <div class="resultados" id="lista-campeonatos"></div>
+
+    </div>
+
+    <!-- Seu JavaScript -->
+    <script src="academia.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cálculo de Calorias - SportLife Hub</title>
+  <link rel="stylesheet" href="cal.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-flex">
+      <div class="logo">SportLife Hub</div>
+      <nav>
+        <a href="/">Início</a>
+        <a href="/quem-somos.html" target="_blank">Quem Somos</a>
+        <a href="/Academia.html">Academias</a>
+        <a href="/calorias.html" class="active">Medir Kal</a>
+        <a href="/listaDeTreino.html">Montar Treino</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="gradient-text">Vamos calcular sua dieta</h1>
+
+    <form id="formCalorias">
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" name="sexo" required>
+        <option value="">Selecione</option>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+      </select>
+
+      <label for="idade">Idade:</label>
+      <input type="number" id="idade" name="idade" placeholder="Anos" required>
+
+      <label for="peso">Peso (kg):</label>
+      <input type="number" id="peso" name="peso" step="0.1" placeholder="Ex: 70.5" required>
+
+      <label for="altura">Altura (cm):</label>
+      <input type="number" id="altura" name="altura" placeholder="Ex: 175" required>
+
+      <label for="atividade">Nível de Atividade:</label>
+      <select id="atividade" name="atividade" required>
+        <option value="">Selecione</option>
+        <option value="1.2">Sedentário</option>
+        <option value="1.375">Exercício leve</option>
+        <option value="1.55">Moderado</option>
+        <option value="1.725">Intenso</option>
+        <option value="1.9">Atleta</option>
+      </select>
+
+      <div id="atividadesExtrasContainer" class="card-atividades">
+        <h3 class="titulo-atividades">Quais atividades físicas você pratica?</h3>
+        <p class="subinfo">Selecione todas as atividades que fazem parte da sua rotina para estimar melhor seu gasto energético.</p>
+        <div id="atividadesExtras" class="lista-atividades">
+          <!-- mantenha os checkboxes que quiser -->
+          <label><input type="checkbox" name="atividades" value="academia"> Academia</label>
+          <label><input type="checkbox" name="atividades" value="corrida"> Corrida</label>
+          <label><input type="checkbox" name="atividades" value="natação"> Natação</label>
+          <!-- ... -->
+        </div>
+
+        <label for="frequencia" class="label-frequencia">Quantas vezes por semana você treina?</label>
+        <select id="frequencia" name="frequencia" class="select-frequencia">
+          <option value="">Selecione</option>
+          <option value="1">1x por semana</option>
+          <option value="2">2x por semana</option>
+          <option value="3">3x por semana</option>
+          <option value="4">4x por semana</option>
+          <option value="5">5x por semana</option>
+          <option value="6">6x por semana</option>
+          <option value="7">Todos os dias</option>
+        </select>
+      </div>
+
+      <label for="objetivo">Objetivo:</label>
+      <select id="objetivo" name="objetivo" required>
+        <option value="">Selecione</option>
+        <option value="emagrecer">Emagrecer</option>
+        <option value="manter">Manter peso</option>
+        <option value="ganhar">Ganhar massa muscular</option>
+      </select>
+
+      <!-- Campo novo: gostos / conversar com nutricionista -->
+      <label for="preferencias">Fale com a nutricionista (gostos, intolerâncias, alimentos que evita):</label>
+      <textarea id="preferencias" name="preferencias" placeholder="Ex: adoro frango, evito lactose, prefiro pratos rápidos..." rows="4"></textarea>
+
+      <button type="submit">Calcular e Recomendar</button>
+    </form>
+
+    <div id="resultado" style="margin-top:20px;"></div>
+  </main>
+
+  <script src="cal.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+/* ----------------------- */
+/* CONFIGURAÇÃO GLOBAL     */
+/* ----------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f4;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ----------------------- */
+/* HEADER                  */
+/* ----------------------- */
+.header {
+    width: 100%;
+    padding: 20px 0;
+    background: #ff0000;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.header nav a {
+    color: white;
+    margin-left: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.header nav a:hover,
+.header nav .active {
+    color: #ffe5e5;
+}
+
+/* ----------------------- */
+/* HERO SIMPLES            */
+/* ----------------------- */
+.hero {
+    width: 100%;
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #d40000, #ff0000);
+    color: white;
+    border-radius: 0 0 50px 50px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: #ffe5e5;
+}
+
+/* ----------------------- */
+/* GRADIENTE TEXTOS         */
+/* ----------------------- */
+.gradient-text {
+    background: linear-gradient(45deg, #ff0000, #ff6a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    font-size: 32px;
+}
+
+/* ----------------------- */
+/* PILLS                   */
+/* ----------------------- */
+.pill-light {
+    background: #ffe5e5;
+    color: #ff0000;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+/* ----------------------- */
+/* QUEM SOMOS / EQUIPE     */
+/* ----------------------- */
+.quem-somos {
+    padding: 50px 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.qs-top {
+    margin-bottom: 20px;
+}
+
+.qs-subtitle {
+    color: #555;
+    font-size: 17px;
+}
+
+/* GRID CARDS */
+.qs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* CARDS */
+.qs-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(255,0,0,0.15);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.qs-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 30px rgba(255,0,0,0.25);
+}
+
+/* PADRÃO PARA IMAGENS DA EQUIPE */
+.qs-card img {
+    width: 150px;        /* largura fixa */
+    height: 150px;       /* altura fixa */
+    object-fit: cover;   /* mantém proporção e corta o excesso */
+    border-radius: 50%;  /* deixa circular */
+    margin: 0 auto 15px; /* centraliza horizontalmente e espaçamento abaixo */
+    display: block;
+}
+
+
+.qs-card h3 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.qs-card p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* ----------------------- */
+/* RESPONSIVIDADE          */
+/* ----------------------- */
+@media (max-width: 992px) {
+    .qs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .qs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+    }
+
+    .gradient-text {
+        font-size: 28px;
+    }
+}

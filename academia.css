@@ -1,0 +1,202 @@
+/* ==========================
+   RESET E CONFIGURAÇÃO GLOBAL
+========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f4;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+/* ==========================
+   HEADER
+========================== */
+.header {
+    width: 100%;
+    background: #ff0000;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.header nav a:hover,
+.header nav .active {
+    color: #ffe5e5;
+}
+
+/* ==========================
+   CARD DE BUSCA
+========================== */
+.card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin: 40px 0;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.col-4 {
+    flex: 1 1 30%;
+}
+
+.col-12 {
+    flex: 1 1 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #e50914;
+}
+
+button.btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.btn:hover {
+    background: #b70d10;
+}
+
+/* ==========================
+   RESULTADOS
+========================== */
+.resultados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.resultados .resultado-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.resultados .resultado-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.resultados h3 {
+    color: #ff0000;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.resultados p {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.btn-link {
+    display: inline-block;
+    margin-top: 10px;
+    background: #ff0000;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-link:hover {
+    background: #b70d10;
+}
+
+.no-results {
+    text-align: center;
+    font-weight: bold;
+    color: #b70d10;
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 992px) {
+    .col-4 {
+        flex: 1 1 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-4 {
+        flex: 1 1 100%;
+    }
+
+    .grid {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .resultados {
+        grid-template-columns: 1fr;
+    }
+}
